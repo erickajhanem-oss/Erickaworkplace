@@ -1,0 +1,62 @@
+# A simple Task Manager program using Python
+
+def show_menu():
+    print("\n--- MY TO-DO LIST ---")
+    print("[1] View Tasks")
+    print("[2] Add a New Task")
+    print("[3] Delete a Task")
+    print("[4] Exit")
+
+def main():
+    tasks = [] # List where tasks will be stored
+    
+    while True:
+        show_menu()
+        choice = input("\nChoose a number for what you want to do (1-4): ")
+        
+        if choice == "1":
+            # View tasks
+            if len(tasks) == 0:
+                print("\nThere are no tasks listed yet.")
+            else:
+                print("\nLIST OF TASKS:")
+                for index, task in enumerate(tasks, start=1):
+                    print(f"{index}. {task}")
+                    
+        elif choice == "2":
+            # Add a task
+            new_task = input("\nEnter the new task: ")
+            if new_task.strip() != "":
+                tasks.append(new_task)
+                print(f"Successfully added: '{new_task}'")
+            else:
+                print("\nBlank tasks are not allowed!")
+                
+        elif choice == "3":
+            # Delete a task
+            if len(tasks) == 0:
+                print("\nYou have no tasks to delete.")
+            else:
+                print("\nLIST OF TASKS:")
+                for index, task in enumerate(tasks, start=1):
+                    print(f"{index}. {task}")
+                
+                try:
+                    delete_index = int(input("\nEnter the number of the completed or task to delete: "))
+                    if 1 <= delete_index <= len(tasks):
+                        removed = tasks.pop(delete_index - 1)
+                        print(f"Successfully deleted: '{removed}'")
+                    else:
+                        print("\nNo such number exists in the list.")
+                except ValueError:
+                    print("\nPlease enter a valid number.")
+                    
+        elif choice == "4":
+            print("\nThanks for using! Goodbye.")
+            break
+        else:
+            print("\nInvalid choice. Please choose only from 1 to 4.")
+
+# Run the program
+if __name__ == "__main__":
+    main()
